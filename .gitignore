@@ -1,0 +1,10 @@
+# dependencies (vendored for drop-in use, but not committed — run `npm install` after clone)
+node_modules/
+
+# test scratch
+test/sample.psd
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.log

@@ -1,0 +1,48 @@
+{
+  "package_version": 2,
+  "name": "cocos-psd-prefab-3x",
+  "version": "1.0.0",
+  "description": "Standalone Cocos Creator 3.8.x editor extension: convert a Photoshop .psd into a 3.x prefab (PNG export + sprite-frame meta + MD5 image dedup + transparent-edge trim), driven by a layer naming convention. Code-friendly output: English names, type prefixes, unique sibling names. 3.8.x port of cocos-psd-prefab-2x.",
+  "author": "liyu",
+  "license": "MIT",
+  "editor": ">=3.8.0",
+  "main": "./main.js",
+  "panels": {
+    "default": {
+      "title": "PSD 转预制体",
+      "type": "dockable",
+      "main": "./panel/index.js",
+      "size": {
+        "min-width": 360,
+        "min-height": 320,
+        "width": 440,
+        "height": 440
+      }
+    }
+  },
+  "contributions": {
+    "menu": [
+      {
+        "path": "i18n:menu.panel/PSD 工具",
+        "label": "PSD 转预制体",
+        "message": "open-panel"
+      }
+    ],
+    "messages": {
+      "open-panel": { "methods": ["openPanel"] },
+      "convert-psd": { "methods": ["convertPsd"] },
+      "project-path": { "methods": ["projectPath"] }
+    }
+  },
+  "bin": { "psd2prefab": "psd2prefab.js" },
+  "scripts": {
+    "make-sample": "node test/make_test_psd.js",
+    "test": "node test/make_test_psd.js && node psd2prefab.js test/sample.psd --project ../testwork --name Demo3x && node test/verify.js ../testwork"
+  },
+  "dependencies": {
+    "ag-psd": "^30.0.0",
+    "pngjs": "^7.0.0",
+    "pinyin-pro": "^3.0.0"
+  },
+  "engines": { "node": ">=14" }
+}
