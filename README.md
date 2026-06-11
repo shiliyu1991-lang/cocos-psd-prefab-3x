@@ -15,8 +15,7 @@
 3. 勾选项（去重 / 裁剪透明边 / 压平空容器 / 合并装饰 / 校验缓存）
 4. **转换为预制体** → 结果写入 `assets/<out>/prefabs` 与 `assets/<out>/textures`，并自动刷新资源库
 
-依赖（`ag-psd` / `pngjs` / `pinyin-pro`）已内置在 `node_modules`（**无需 npm install**）。
-> 本目录的 `node_modules` 是指向 `../cocos-psd-prefab-2x/node_modules` 的目录联接（junction），与 2x 共享同一份依赖。独立分发时把它换成真实拷贝即可。
+依赖（`ag-psd` / `pngjs` / `pinyin-pro`）已内置并**随仓库提交**在 `node_modules` 里——克隆或下载后直接丢进 `extensions/` 即可用，**无需 npm install、无需构建**。
 
 ## 命令行（无需编辑器）
 

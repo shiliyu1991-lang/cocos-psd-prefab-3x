@@ -1,5 +1,4 @@
-# dependencies (vendored for drop-in use, but not committed — run `npm install` after clone)
-node_modules/
+# dependencies are vendored AND committed for true drop-in use (no npm install).
 
 # test scratch
 test/sample.psd
