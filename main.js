@@ -44,6 +44,11 @@ async function convertPsd(params) {
     }
 
     const outDir = (params.outDir && String(params.outDir).trim()) || 'PSD';
+
+    // Write PNGs (+ correct sprite-frame metas) and the prefab. The converter
+    // authors each .png.meta with userData.type='sprite-frame' and imported:false,
+    // so the editor actually builds the texture + sprite-frame sub-assets and the
+    // prefab's <uuid>@f9941 references resolve. (See lib/convert.js makeImageMeta.)
     const report = await core.convert({
         psdPath: params.psdPath,
         projectRoot: projectRoot,
@@ -57,11 +62,12 @@ async function convertPsd(params) {
         keepHidden: !!params.keepHidden,
     });
 
-    // Import the new assets so they show up in the editor (best-effort).
+    // Import textures first (so sprite-frames exist), then the prefab that refs them.
+    try { await Editor.Message.request('asset-db', 'refresh-asset', 'db://assets/' + outDir + '/textures'); } catch (e) { /* ignore */ }
     try { await Editor.Message.request('asset-db', 'refresh-asset', 'db://assets/' + outDir); } catch (e) { /* ignore */ }
 
     _log('converted:', (report.prefab && report.prefab.path),
-        'nodes=' + report.nodes, 'written=' + report.written,
+        'nodes=' + report.nodes, 'images=' + report.written,
         'reused=' + report.reused, 'ignored=' + report.ignored.length);
     return report;
 }
